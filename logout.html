@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Logout</title>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    background: #d6b89f;
+}
+
+.container {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    background: black;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background: #333;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>Logout</h2>
+    <p>Are you sure you want to logout?</p>
+
+    <button onclick="logout()">Logout</button>
+
+    <!-- ✅ MOVE TO NEXT LINE -->
+    <div>
+        <a href="myaccount.html" style="display:inline-block;margin-top:14px;color:#2563eb;">
+            ← Back to Account
+        </a>
+    </div>
+</div>
+
+<script>
+function logout() {
+    // Clear browser storage (if used)
+    localStorage.clear();
+    sessionStorage.clear();
+
+    // Redirect to login page
+    window.location.href = "login.html";
+}
+</script>
+
+</body>
+</html>

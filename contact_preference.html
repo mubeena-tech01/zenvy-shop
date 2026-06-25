@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Preferences - Zenvy</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- FONT AWESOME -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+* { box-sizing: border-box; }
+
+body { 
+    margin:0; 
+    font-family:'Poppins',sans-serif; 
+    background:#d6b89f; 
+    color:#1f2937; 
+}
+
+/* NAVBAR */
+.bottom-nav{
+position:fixed;
+bottom:0;
+width:100%;
+height:70px;
+display:flex;
+justify-content:space-around;
+align-items:center;
+background:white;
+border-top-left-radius:20px;
+border-top-right-radius:20px;
+box-shadow:0 -5px 15px rgba(0,0,0,0.1);
+}
+
+.nav-item{
+text-align:center;
+text-decoration:none;
+color:#aaa;
+font-size:11px;
+flex:1;
+}
+
+.nav-item i{
+display:block;
+font-size:22px;
+margin-bottom:3px;
+}
+
+.nav-item.active{
+color:#2d6a4f;
+font-weight:bold;
+}
+
+.container {
+    display:grid;
+    grid-template-columns:260px 1fr;
+    min-height:100vh;
+    padding-bottom:80px; /* space for navbar */
+}
+
+
+.sidebar { background:#fff; border-right:1px solid #e5e7eb; padding:24px; }
+
+.logo { font-size:22px; font-weight:700; margin-bottom:26px; }
+
+.profile-box { display:flex; gap:12px; margin-bottom:20px; }
+
+.avatar {
+    width:50px;
+    height:50px;
+    background:#1f2937;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#fff;
+    font-weight:700;
+}
+
+.menu a {
+    display:block;
+    padding:12px;
+    border-radius:8px;
+    text-decoration:none;
+    color:#374151;
+    margin-bottom:6px;
+    cursor:pointer;
+}
+
+.menu a.active {
+    background:#eef2ff;
+    color:#1e40af;
+}
+
+.main { padding:30px; }
+
+.section {
+    background:#fff;
+    border-radius:12px;
+    padding:25px;
+    margin-bottom:14px;
+}
+
+/* Toggle */
+.pref-row {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 0;
+    border-bottom:1px solid #eee;
+}
+
+.pref-row:last-child { border-bottom:none; }
+
+.switch { position:relative; width:44px; height:22px; }
+
+.switch input { display:none; }
+
+.slider {
+    position:absolute;
+    cursor:pointer;
+    top:0; left:0; right:0; bottom:0;
+    background:#ccc;
+    border-radius:34px;
+}
+
+.slider:before {
+    position:absolute;
+    content:"";
+    height:16px;
+    width:16px;
+    left:3px;
+    bottom:3px;
+    background:white;
+    border-radius:50%;
+}
+
+input:checked + .slider { background:#2563eb; }
+
+input:checked + .slider:before {
+    transform:translateX(22px);
+}
+
+.btn-save {
+    background:#2563eb;
+    color:#fff;
+    border:none;
+    padding:12px 24px;
+    border-radius:8px;
+    cursor:pointer;
+    margin-top:20px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+    <div class="logo">Zenvy</div>
+
+    <div class="profile-box">
+        <div class="avatar" id="avatar">U</div>
+        <div>
+            <h2 id="username">Username</h2>
+            <p id="phone">Phone Number</p>
+            <p id="email">Email</p>
+        </div>
+    </div>
+
+    <div class="menu">
+        <a href="profile.html">Account overview</a>
+        <a href="myorders.php">My orders</a>
+        <a href="wishlist.html">My Wishlist</a>
+        <a href="change_password.html">Change password</a>
+        <a href="payment_method.html">Payment methods</a>
+        <a class="active">Contact preferences</a>
+        <a onclick="ZenvyChat.open()">Need Help?</a>
+        <a href="qa.html">Q&A</a>
+        <a href="returns.html">Returns</a>
+        <a href="privacy.html">Privacy Notice</a>
+        <a href="about.html">About Us</a>
+        <a href="terms.html">Terms & Conditions</a>
+        <a onclick="logout()">Logout</a>
+    </div>
+</aside>
+
+<!-- MAIN -->
+<main class="main">
+
+<h1>Contact Preferences</h1>
+
+<div class="section">
+
+<div class="pref-row">
+    <div>
+        <h4>Email</h4>
+        <p>Receive newsletters</p>
+    </div>
+    <label class="switch">
+        <input type="checkbox" id="emailPref">
+        <span class="slider"></span>
+    </label>
+</div>
+
+<div class="pref-row">
+    <div>
+        <h4>SMS</h4>
+        <p>Get alerts on phone</p>
+    </div>
+    <label class="switch">
+        <input type="checkbox" id="smsPref">
+        <span class="slider"></span>
+    </label>
+</div>
+
+<div class="pref-row">
+    <div>
+        <h4>Post</h4>
+        <p>Receive catalog</p>
+    </div>
+    <label class="switch">
+        <input type="checkbox" id="postPref">
+        <span class="slider"></span>
+    </label>
+</div>
+
+<button class="btn-save" onclick="savePrefs()">Save Preferences</button>
+
+<p id="msg" style="color:green;"></p>
+
+</div>
+
+</main>
+</div>
+
+<!-- SCRIPT -->
+<script>
+
+// USER DATA
+let name = localStorage.getItem("username") || "User";
+let phone = localStorage.getItem("phone") || "No Phone";
+let email = localStorage.getItem("email") || "No Email";
+
+document.getElementById("username").innerText = name;
+document.getElementById("phone").innerText = phone;
+document.getElementById("email").innerText = email;
+document.getElementById("avatar").innerText = name.charAt(0).toUpperCase();
+
+// LOAD PREFS
+document.getElementById("emailPref").checked = localStorage.getItem("emailPref") === "true";
+document.getElementById("smsPref").checked = localStorage.getItem("smsPref") === "true";
+document.getElementById("postPref").checked = localStorage.getItem("postPref") === "true";
+
+// SAVE PREFS
+function savePrefs(){
+    localStorage.setItem("emailPref", document.getElementById("emailPref").checked);
+    localStorage.setItem("smsPref", document.getElementById("smsPref").checked);
+    localStorage.setItem("postPref", document.getElementById("postPref").checked);
+
+    document.getElementById("msg").innerText = "Preferences saved!";
+}
+
+// LOGOUT
+function logout(){
+    localStorage.clear();
+    window.location.href = "login.html";
+}
+
+
+</script>
+<!-- ✅ CHATBOT SCRIPT (UNCHANGED) -->
+<script src="zenvy-chat-widget.js"></script>
+
+<!-- ✅ NAVBAR (ONLY ADDED HERE) -->
+<div class="bottom-nav">
+<a href="home.php" class="nav-item active">
+<i class="fa-solid fa-house"></i>
+<span>Home</span>
+</a>
+
+<a href="wishlist.php" class="nav-item">
+<i class="fa-regular fa-heart"></i>
+<span>Wishlist</span>
+</a>
+
+<a href="cart.php" class="nav-item">
+<i class="fa-solid fa-cart-shopping"></i>
+<span>Cart</span>
+</a>
+
+<a href="myaccount.html" class="nav-item">
+<i class="fa-regular fa-user"></i>
+<span>Account</span>
+</a>
+
+</div>
+
+</body>
+</html>
